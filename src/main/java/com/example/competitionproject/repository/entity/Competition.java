@@ -1,5 +1,7 @@
 package com.example.competitionproject.repository.entity;
 
+import com.example.competitionproject.repository.eum.CompetitionState;
+import com.example.competitionproject.repository.eum.State;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,22 +21,37 @@ public class Competition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    Long competiterId;
+    String competitionTitle;
+    String competitionDefinition;
+    String picture;
+    int numberOfWinner;
 
-    @OneToMany(mappedBy = "competition")
+    @Enumerated(EnumType.STRING)
+    CompetitionState competitionState = CompetitionState.ACTIVE_SESSION;
+
+    @Enumerated(EnumType.STRING)
+    State state = State.AWAITINGAPPROVAL;
+
+    @Embedded
+    CommonData commonData;
+
+//    @OneToMany(mappedBy = "competition")
+    @Transient
     List <User> userList;
 
-  //  @OneToMany(mappedBy = )
-  //  List<User> winnerList;
-
-    @OneToMany (mappedBy = "question")
+//    @OneToMany (mappedBy = "question")
+    @Transient
     List<Question> questionList;
 
-    @OneToMany (mappedBy = "answer")
-    List<Answer> answerList;
+//    @OneToMany (mappedBy = "answer")
+//    List<Answer> answerList;
 
-    @OneToOne
-    @JoinColumn(name = "answer", referencedColumnName = "answer")
-    Answer answer;
+//    @OneToOne
+//    @JoinColumn(name = "answer", referencedColumnName = "answer")
+//    Answer answer;
 
+    //  @OneToMany(mappedBy = )
+    //  List<User> winnerList;
 
 }

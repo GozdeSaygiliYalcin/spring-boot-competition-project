@@ -1,5 +1,6 @@
 package com.example.competitionproject.repository.entity;
 
+import com.example.competitionproject.repository.eum.State;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,19 +18,31 @@ import java.util.List;
 public class Question {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    Long adminId;
+    @Column(length = 1000)
     String question;
-    @OneToOne(mappedBy = "question")
-    Answer answer;
+    Long duration;
+    int numberOfOption;
+    String numberOfGroup;
+    @Enumerated(EnumType.STRING)
+    State state = State.AWAITINGAPPROVAL;
+    @Embedded
+    CommonData commonData;
 
-   // List<Answer> answerList;
-    @ManyToOne
-    @JoinColumn(name = "question_generator", referencedColumnName = "id")
-    User questionGenerator;
+//    @OneToOne(mappedBy = "question")
+//    Answer correctAnswer;
+//
+//   // List<Answer> answerList;
+//    @ManyToOne
+//    @JoinColumn(name = "question_generator", referencedColumnName = "id")
+//    User questionGenerator;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "competition", referencedColumnName = "id")
+//    Competition competition;
 
-    @ManyToOne
-    @JoinColumn(name = "competition", referencedColumnName = "id")
-    Competition competition;
+
 
 }

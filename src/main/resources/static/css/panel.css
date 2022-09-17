@@ -1,0 +1,96 @@
+.container-fluid{
+    min-height: 768px ;
+    border: 1px solid #000000;
+    margin: 10px;
+    background-color: #B1B2FF;
+}
+
+.siralama{
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    padding: 10px;
+    margin: 10px;
+
+
+    border: 1px solid #EEF1FF;
+}
+.siralama ul{
+    margin-left: 3px;;
+}
+
+.siralama ul li{
+    margin: 5px;
+}
+
+.islembutonlari{
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+
+}
+
+.islemcontainer{
+
+    border-radius: 50px;
+    background-color: #AAC4FF ;
+    padding: 10px;
+    margin: 10px;
+    margin-top:50px;
+    margin-bottom: 50px;
+}
+
+h2{
+    text-align: center;
+    color: #EEF1FF;
+}
+
+.order{
+    margin-top: 10px;
+    padding: 10px;
+
+}
+
+.order img{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+.sorucevapcontainer{
+
+    background-color: #AAC4FF ;
+    padding: 10px;
+    margin: 10px;
+    min-height: 700px;
+}
+
+.katilimcilarcontainer{
+
+    background-color: #AAC4FF ;
+    padding: 10px;
+    margin: 10px;
+    min-height: 700px;
+}
+.yarismaci{
+    display: flexbox;
+    justify-content: center;
+    align-items: center;
+}
+.yarismaci img{
+    border-radius: 50%;
+
+}
+.online{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #00FF00;
+}
+.offline{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #FF0000;
+}
+p{
+    text-align: center;
+}

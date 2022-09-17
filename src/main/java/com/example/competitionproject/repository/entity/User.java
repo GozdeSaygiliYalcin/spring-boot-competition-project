@@ -1,5 +1,7 @@
 package com.example.competitionproject.repository.entity;
 
+import com.example.competitionproject.repository.eum.Role;
+import com.example.competitionproject.repository.eum.State;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,18 +21,25 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @Column( name = "first_name", length = 300)
-    String firstName;
-    @Column( name = "last_name", length = 300)
-    String lastName;
+    @Column( name = "full_name", length = 300)
+    String fullName;
+    @Column( name = "user_name", length = 300)
+    String userName;
     String password;
     @Enumerated(EnumType.STRING)
-    Role role;
-    @OneToMany(mappedBy = "questionGenerator")
-    List<Question> questionList;
-    @ManyToOne
-    @JoinColumn(name = "competition", referencedColumnName = "id")
-    Competition competition;
+    Role role = Role.COMPETITOR;
+    @Enumerated(EnumType.STRING)
+    State state = State.APPROVED;
+    @Embedded
+    CommonData commonData;
+
+//    @OneToMany(mappedBy = "questionGenerator")
+//    List<Question> questionList;
+//    @ManyToOne
+//    @JoinColumn(name = "competition", referencedColumnName = "id")
+//    Competition competition;
+
+
 
 }
 

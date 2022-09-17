@@ -1,5 +1,6 @@
 package com.example.competitionproject.repository.entity;
 
+import com.example.competitionproject.repository.eum.State;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,13 +17,28 @@ import javax.persistence.*;
 public class Answer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    Long questionId;
+    @Column(length = 1000)
     String answer;
-    @OneToOne
-    @JoinColumn(name = "question", referencedColumnName = "id")
-    Question question;
+    boolean isTrue;
+    /**
+     *Bütün entitylerde olması gereken dataların olduğu ve
+     * repository oluşturmamıza gerek olmayan sınıfı bütün entitylere
+     * embedded etiketiyle ekliyoruz
+     */
+    @Embedded
+    CommonData commonData;
 
-    @OneToOne (mappedBy = "answer")
-    Competition competition;
+    @Enumerated(EnumType.STRING)
+    State state = State.APPROVED;
+   // @OneToOne
+   // @JoinColumn(name = "question", referencedColumnName = "id")
+   // Question question;
+
+//    @OneToOne (mappedBy = "answer")
+//    Competition competition;
+
+
 }
