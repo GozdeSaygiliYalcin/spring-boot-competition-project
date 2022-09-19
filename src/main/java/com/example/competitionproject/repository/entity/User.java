@@ -1,14 +1,13 @@
 package com.example.competitionproject.repository.entity;
 
-import com.example.competitionproject.repository.eum.Role;
-import com.example.competitionproject.repository.eum.State;
+import com.example.competitionproject.repository.enums.Role;
+import com.example.competitionproject.repository.enums.State;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Table(name = "users_table")
 @Entity

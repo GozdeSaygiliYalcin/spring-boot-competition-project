@@ -1,6 +1,6 @@
 package com.example.competitionproject.repository.entity;
 
-import com.example.competitionproject.repository.eum.State;
+import com.example.competitionproject.repository.enums.State;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

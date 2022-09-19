@@ -1,4 +1,4 @@
-package com.example.competitionproject.repository.eum;
+package com.example.competitionproject.repository.enums;
 
 public enum AccessionType {
 

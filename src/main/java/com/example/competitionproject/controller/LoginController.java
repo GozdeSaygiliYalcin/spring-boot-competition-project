@@ -1,6 +1,7 @@
 package com.example.competitionproject.controller;
 
-import com.example.competitionproject.dto.request.DoLoginDto;
+import com.example.competitionproject.dto.request.DoLoginRequestDto;
+import com.example.competitionproject.dto.request.RegisterRequestDto;
 import com.example.competitionproject.repository.entity.User;
 import com.example.competitionproject.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -30,8 +31,22 @@ public class LoginController {
             return new ModelAndView("register");
         }
 
+        @PostMapping("/register")
+        public ModelAndView register(RegisterRequestDto dto) {
+            boolean isRegister = userService.register(dto);
+            ModelAndView model = new ModelAndView();
+            if(isRegister) {
+                model.setViewName("/redirect:/login");
+            } else {
+                model.addObject("error",
+                        "kullanıcı adı daha önce alınmıştır");
+                model.setViewName("register");
+            }
+            return model;
+        }
+
         @PostMapping("/login")
-        public ModelAndView login(DoLoginDto doLoginDto){
+        public ModelAndView login(DoLoginRequestDto doLoginDto){
             Optional<User> userOptional =  userService.doLogin(doLoginDto);
             ModelAndView modelAndView = new ModelAndView();
             if(userOptional.isEmpty()){

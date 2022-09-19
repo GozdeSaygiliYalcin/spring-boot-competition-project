@@ -1,7 +1,6 @@
 package com.example.competitionproject.repository.entity;
 
-import com.example.competitionproject.repository.eum.AccessionType;
-import com.example.competitionproject.repository.eum.State;
+import com.example.competitionproject.repository.enums.AccessionType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

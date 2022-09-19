@@ -1,7 +1,5 @@
 package com.example.competitionproject.repository.entity;
 
-import com.example.competitionproject.repository.eum.State;
-
 import javax.persistence.Embeddable;
 
 @Embeddable

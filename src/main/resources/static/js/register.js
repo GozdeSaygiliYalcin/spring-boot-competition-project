@@ -1,4 +1,2 @@
 var myApp = angular.module("myApp", []);
-myApp.controller("RegisterCtrl", function ($scope) {
-
-});
+myApp.controller("RegisterCtrl", function ($scope) {});
