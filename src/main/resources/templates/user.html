@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Panel</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,900,400italic,700italic" rel="stylesheet">
+    <link rel="stylesheet" href="/css/user.css">
+</head>
+<body class="skin-blue">
+<div class="wrapper">
+
+    <header class="main-header">
+        <a href="#" class="logo">Server Monitor</a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <div class="navbar-custom-menu">
+            </div>
+        </nav>
+    </header>
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <ul class="sidebar-menu">
+                <li role="presentation"><a href="#"><i class="fa fa-tachometer"></i> Dashboard</a></li>
+                <li class="header">FOLDERS</li>
+                <li role="presentation" class="active"><a href="http://crudkit.com/demo/?page=sqlite2&amp;action=view_page"><i class="fa fa-server"></i>&nbsp;023APP01</a></li>
+                <li role="presentation"><a href="http://crudkit.com/demo/?page=sqlite1&amp;action=view_page">
+                    <i class="fa fa-server"></i>
+                    <span class="server-id">023APP22</span><br>
+                    <span class="server-tag">Oracle Staging Server</span></a></li>
+                <li class="header">ACCOUNT</li>
+                <li role="presentation"><a href="http://crudkit.com/demo/?__ckLogout=1"><i class="fa fa-sign-out"></i>Log out</a></li>
+            </ul>
+        </section>
+    </aside>
+
+    <div class="content-wrapper" style="min-height: 279px;">
+        <section class="content-header">
+            <div class="row">
+                <div class="col-md-8">
+                    <h3 style="margin-top: 5px"><i class="fa fa-folder"></i>Active Game Server
+                    </h3>
+                </div>
+                <div class="col-md-4">
+                    <div class="pull-right">
+                        <a href="#" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Reload List</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="col-md-12">
+            <div id="alertTarget">
+            </div>
+        </div>
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-primary" style="padding-top:15px">
+                        <div class="box-body">
+
+                            <div ng-controller="SummaryTableController" class="ng-scope">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="input-group col-md-5">
+                                            <input type="text" class="form-control ng-pristine ng-untouched ng-valid" placeholder="" ng-model="searchTerm" ng-keyup="$event.keyCode == 13 ? filterColumns () : null">
+                                            <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="filterColumns()" ng-disabled="searchTerm == ''" disabled="disabled">Search</button>
+                </span>
+                                        </div>
+                                    </div><!-- /input-group -->
+                                    <div class="col-md-3">
+                                        <div class="pull-right">
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row ng-hide" ng-show="selectedCount > 0 &amp;&amp; isWritable ()">
+                                    <div class="col-md-12 ng-binding">
+                                        With 0 Rows: <confirm-button label="Delete" activate="deleteRows ()" ck-class="btn-danger">
+                                    </confirm-button></div>
+                                </div>
+                                <div cg-busy="loadingPromise" style="position: relative;">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th style="width: 30px">
+                                                <input type="checkbox" ng-change="selectAll ()" ng-model="allSelectedFlag" class="table-checkbox ng-pristine ng-untouched ng-valid">
+                                            </th>
+                                            <!-- ngRepeat: col in columns --><th class="lib-name">
+                                            IP Address
+                                        </th>
+                                            <th class="lib-tag">
+                                                Country
+                                            </th>
+                                            <th class="lib-add">
+                                                View Details
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <!-- ngRepeat: row in rows --><tr ng-repeat="row in rows" ng-class="{'info': row.selectedFlag}" class="ng-scope">
+                                            <td>
+                                                <input ng-model="row.selectedFlag" type="checkbox" class="table-checkbox ng-pristine ng-untouched ng-valid" ng-change="updateSelectedCount ()">
+                                            </td>
+                                            <!-- ngRepeat: col in columns --><td ng-repeat="col in columns" class="ng-scope">
+                                            <div ng-switch="" on="col.renderType">
+                                                <!-- ngSwitchWhen: string -->
+                                                <!-- ngSwitchWhen: number -->
+                                                <!-- ngSwitchWhen: datetime -->
+                                                <!-- ngSwitchWhen: primaryLink --><div ng-switch-when="primaryLink" class="ng-scope">
+                                                <a ng-href="http://crudkit.com/demo/?action=page_function&amp;func=view_item&amp;item_id=1&amp;page=sqlite2" class="ng-binding" href="http://crudkit.com/demo/?action=page_function&amp;func=view_item&amp;item_id=1&amp;page=sqlite2">192.168.0.1</a>
+                                            </div><!-- end ngSwitchWhen: -->
+                                            </div>
+                                        </td><!-- end ngRepeat: col in columns --><td ng-repeat="col in columns" class="ng-scope">
+                                            <div ng-switch="" on="col.renderType">
+                                                <!-- ngSwitchWhen: string --><div ng-switch-when="string" class="ng-binding ng-scope">
+                                                Brazil
+                                            </div><!-- end ngSwitchWhen: -->
+                                                <!-- ngSwitchWhen: number -->
+                                                <!-- ngSwitchWhen: datetime -->
+                                                <!-- ngSwitchWhen: primaryLink -->
+                                            </div>
+                                        </td><!-- end ngRepeat: col in columns -->
+                                            <td>
+                                                <a href="#" class="btn btn-success"><i class="fa fa-plus-circle"></i> View</a>
+                                            </td>
+                                        </tr><!-- end ngRepeat: row in rows --><tr ng-repeat="row in rows" ng-class="{'info': row.selectedFlag}" class="ng-scope">
+                                            <td>
+                                                <input ng-model="row.selectedFlag" type="checkbox" class="table-checkbox ng-pristine ng-untouched ng-valid" ng-change="updateSelectedCount ()">
+                                            </td>
+                                            <!-- ngRepeat: col in columns --><td ng-repeat="col in columns" class="ng-scope">
+                                            <div ng-switch="" on="col.renderType">
+                                                <!-- ngSwitchWhen: string -->
+                                                <!-- ngSwitchWhen: number -->
+                                                <!-- ngSwitchWhen: datetime -->
+                                                <!-- ngSwitchWhen: primaryLink --><div ng-switch-when="primaryLink" class="ng-scope">
+                                                <a ng-href="http://crudkit.com/demo/?action=page_function&amp;func=view_item&amp;item_id=8&amp;page=sqlite2" class="ng-binding" href="http://crudkit.com/demo/?action=page_function&amp;func=view_item&amp;item_id=8&amp;page=sqlite2">192.168.0.1</a>
+                                            </div><!-- end ngSwitchWhen: -->
+                                            </div>
+                                        </td><!-- end ngRepeat: col in columns --><td ng-repeat="col in columns" class="ng-scope">
+                                            <div ng-switch="" on="col.renderType">
+                                                <!-- ngSwitchWhen: string --><div ng-switch-when="string" class="ng-binding ng-scope">
+                                                Belgium
+                                            </div><!-- end ngSwitchWhen: -->
+                                                <!-- ngSwitchWhen: number -->
+                                                <!-- ngSwitchWhen: datetime -->
+                                                <!-- ngSwitchWhen: primaryLink -->
+                                            </div>
+                                        </td><!-- end ngRepeat: col in columns -->
+
+                                        </tbody>
+                                    </table>
+
+
+
+                                    <div class="cg-busy cg-busy-backdrop cg-busy-backdrop-animation ng-scope ng-hide" ng-show="$cgBusyIsActive()"></div><div class="cg-busy cg-busy-animation ng-scope ng-hide" ng-show="$cgBusyIsActive()"><div class="cg-busy-default-wrapper" style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;">
+
+                                </div></div></div>
+                            </div>
+                            <script type="text/javascript">
+                                window.pageId = "sqlite2";
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Soru Oluşturma</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <div class="row">
+                <div hidden>
+                    <input type="text" id="txtuserid" th:text="${userid}" />
+                </div>
+
+                <div class="col-8">
+                    <div class="mb-3">
+                        <label class="form-label">Soru</label>
+                        <textarea id="txtsoru" class="form-control"  rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="mb-3">
+                        <label class="form-label">Süre</label>
+                        <input id="txtsure" type="text" class="form-control" ></input>
+                    </div>
+                </div>
+            </div>
+            <div  id="options">
+                <div class="mb-3">
+                    <label class="form-label">A</label>
+                    <div class="row">
+                        <div class="col-9">
+                            <input id="A" type="text" class="form-control" placeholder="A Şıkkı">
+                        </div>
+                        <div class="col-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="CheckedA">
+                                <label class="form-check-label" >
+                                    Doğru Cevap
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">B</label>
+                    <div class="row">
+                        <div class="col-9">
+                            <input id="B" type="text" class="form-control" placeholder="B Şıkkı">
+                        </div>
+                        <div class="col-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="CheckedB">
+                                <label class="form-check-label" >
+                                    Doğru Cevap
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="mb-2" style="text-align: center">
+                <button onclick="addOption()" class="btn btn-danger" type="button"><label style="font-size:20px">+</label></button>
+            </div>
+            <div class="d-grid gap-2">
+                <button class="btn btn-success" type="button" onclick="send()">Soruyu Kaydet</button>
+
+            </div>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    const optionList = ['A','B','C','D','E','F','G','H','I','J','K','L'];
+    let optionCount = 2;
+    function addOption(){
+        if(optionCount>9){
+            alert("En fazla 10 şık olabilir");
+            return;
+        }
+        var selectedOption = optionList[optionCount];
+        var option = document.createElement("div");
+        option.innerHTML = ` <div class="mb-3">
+                        <label class="form-label">${selectedOption}</label>
+                        <div class="row">
+                            <div class="col-9">
+                                  <input id="${selectedOption}" type="text" class="form-control" placeholder="${selectedOption} Şıkkı">
+                            </div>
+                            <div class="col-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="Checked${selectedOption}">
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                      Doğru Cevap
+                                    </label>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>`;
+        document.getElementById('options').appendChild(option);
+        optionCount++;
+    }
+    let createQuestionObject= {
+        question: {
+            questionContent: "",
+            duration: 0,
+            adminId: 0,
+            numberOfOption: 0
+        },
+        answerRequestDtos: [],
+
+    }
+
+    function send() {
+        for(i=0;i<optionCount;i++){
+            var selectedOption = optionList[i];
+            var option = document.getElementById(selectedOption).value;
+            var checked = document.getElementById("Checked"+selectedOption).checked;
+            createQuestionObject.answerRequestDtos.push({
+                answerContent: option,
+                isTrue: checked
+            });
+        }
+        createQuestionObject.question.questionContent = document.getElementById('txtsoru').value;
+        createQuestionObject.question.duration = document.getElementById('txtsure').value;
+        createQuestionObject.question.adminId = document.getElementById('txtuserid').value;
+        createQuestionObject.question.numberOfOption = optionCount;
+        fetch('/addquestion"', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(createQuestionObject),
+
+        }).then(()=>{
+            window.location.reload();
+        })
+
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+</body>
+</html>

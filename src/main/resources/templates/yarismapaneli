@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Yarışma </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/panel.css">
+    <script src="/js/panel.js"></script>
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2 islemcontainer">
+                <div class="row siralama">
+                    <h2>Sıralama</h2>
+                    <div class="order shadow-sm">
+                        <img src="/svg/cup-trophy-svgrepo-com.svg" >
+                        Birinci Olan
+                    </div>
+                    <div class="order shadow-sm">
+                        <img src="/svg/cup-trophy-svgrepo-com.svg" >
+                        İkinci Olan
+                    </div>
+                    <div class="order shadow-sm">
+                        <img src="/svg/cup-trophy-svgrepo-com.svg" >
+                        Üçüncü Olan
+                    </div>
+
+                </div>
+                <div class="row islembutonlari">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-success" type="button">Yarışmaya Başla</button>
+                        <button class="btn btn-danger" type="button">Yarışmayı Bitir</button>
+                        <button class="btn btn-warning" type="button">Yeni Soru</button>
+
+                      </div>
+                </div>
+            </div>
+            <div class="col-6 sorucevapcontainer">
+                <div class="row"></div>
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col"></div>
+                </div>
+            </div>
+            <div class="col-3 katilimcilarcontainer">
+                <div class="row">
+                    <h2>KATILIMCI LİSTESİ</h2>
+                </div>
+                <div class="row">
+                    <div class="col-4 yarismaci">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg">
+                        <p><small>Ahmet KUŞ</small></p>
+                        <div class="online"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+</body>
+</html>
