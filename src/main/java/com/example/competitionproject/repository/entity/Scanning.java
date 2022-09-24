@@ -22,6 +22,8 @@ public class Scanning {
     Long userId;
     Long questionId;
     Long date;
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
     State state = State.APPROVED;
     @Embedded
     CommonData commonData;

@@ -26,8 +26,10 @@ public class User {
     String userName;
     String password;
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     Role role = Role.COMPETITOR;
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     State state = State.APPROVED;
     @Embedded
     CommonData commonData;

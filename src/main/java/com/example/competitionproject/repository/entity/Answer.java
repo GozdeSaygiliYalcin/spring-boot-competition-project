@@ -32,6 +32,7 @@ public class Answer {
     CommonData commonData;
 
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     State state = State.APPROVED;
    // @OneToOne
    // @JoinColumn(name = "question", referencedColumnName = "id")

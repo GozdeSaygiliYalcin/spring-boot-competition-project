@@ -28,9 +28,11 @@ public class Competition {
     int numberOfWinner;
 
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     CompetitionState competitionState = CompetitionState.ACTIVE_SESSION;
 
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     State state = State.AWAITINGAPPROVAL;
 
     @Embedded

@@ -24,6 +24,7 @@ public class Winner {
     int score;
     int ranking;
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     State state = State.APPROVED;
     @Embedded
     CommonData commonData;

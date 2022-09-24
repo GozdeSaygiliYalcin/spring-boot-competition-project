@@ -20,6 +20,7 @@ public class QuestionGroup {
     Long id;
     String groupName;
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     State state = State.APPROVED;
     @Embedded
     CommonData commonData;

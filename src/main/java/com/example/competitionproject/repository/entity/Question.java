@@ -26,6 +26,7 @@ public class Question {
     int numberOfOption;
     String numberOfGroup;
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     State state = State.AWAITINGAPPROVAL;
     @Embedded
     CommonData commonData;

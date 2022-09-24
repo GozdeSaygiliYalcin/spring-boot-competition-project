@@ -23,6 +23,7 @@ public class Accession {
     Long competitionId;
     Long date;
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     AccessionType accessionType = AccessionType.NOTAPPROVED;
     @Embedded
     CommonData commonData;

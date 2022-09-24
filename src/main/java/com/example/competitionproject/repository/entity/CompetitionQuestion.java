@@ -25,6 +25,7 @@ public class CompetitionQuestion {
     int duration;
     int numberOfQueue;
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     State state = State.APPROVED;
     @Embedded
     CommonData commonData;
